@@ -1,13 +1,13 @@
 // Interface type for "NearbySearch" API Call
-export interface NearbySearchResponse {
-	error_message: string;
-	html_attributions: string[];
-	results: Place[];
-	status: string;
-}
+// export interface NearbySearchResponse {
+// 	error_message: string;
+// 	html_attributions: string[];
+// 	results: Restaurant[];
+// 	status: string;
+// }
 
-// Interface type for "Place" object
-export interface Place {
+// Interface type for "Resturant" object
+export interface Restaurant {
 	business_status: string;
 	current_opening_hours: {
 		open_now: boolean;
