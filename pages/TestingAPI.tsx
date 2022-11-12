@@ -24,8 +24,6 @@ export default function () {
         }
     }, [coordinates]);
 
-    axios(config).then(function (response: any) {
-    
 
     // Fetch Data
     var axios = require('axios')
@@ -55,9 +53,6 @@ export default function () {
         </div>
     );
 
-    
-    fetch(axios(config)).then(res => { return res.json()})
-        
       
 
     

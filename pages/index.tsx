@@ -16,7 +16,7 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
               </motion.span>
               <motion.div initial={{ opacity: 1, }} animate={mainTitle ? "" : { opacity: 0, x: -1000, transition: { ease: "easeInOut", delay: 0.15 } }} className="flex w-full justify-end mt-5">
                 <button className="rounded-full bg-black text-white text-lg p-3 flex" onClick={() => { setMainTitle(false) }}>
-                  Try now!
+                  Swipe!
                 </button>
               </motion.div>
             </div>
