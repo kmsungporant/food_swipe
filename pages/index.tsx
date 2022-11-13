@@ -17,8 +17,6 @@ export default function Home({
 	const [coordinates, setCoordinates] = useState<Number[]>([]);
 	// Restaurants
 	const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-	const [information, setInformation] = useState<Information>();
-
 	// Boolean
 	const [render, setRender] = useState<boolean>(false);
 
@@ -31,16 +29,6 @@ export default function Home({
 			process.env.NEXT_PUBLIC_GOOGLE_API_KEY
 		}`,
 	};
-
-	useEffect(() => {
-		axios2(config2)
-			.then(function (response: any) {
-				setInformation(response?.data?.result);
-			})
-			.catch(function (error: any) {
-				console.log(error);
-			});
-	}, []);
 
 	// Axios config
 	var axios = require("axios");

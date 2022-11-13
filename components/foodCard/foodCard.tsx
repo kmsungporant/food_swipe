@@ -29,7 +29,7 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 		}
 	};
 
-	const [informations, setInformations] = useState<Information>();
+	const [information, setInformation] = useState<Information>();
 
 	var axios2 = require("axios");
 	var config2 = {
@@ -48,7 +48,7 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 	useEffect(() => {
 		axios2(config2)
 			.then(function (response: any) {
-				setInformations(response?.data?.result);
+				setInformation(response?.data?.result);
 			})
 			.catch(function (error: any) {
 				console.log(error);
@@ -115,11 +115,11 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 								</span>
 								<span className="  flex items-center flex-row gap-x-1">
 									<AiFillPhone />{" "}
-									{informations?.formatted_phone_number}
+									{information?.formatted_phone_number}
 								</span>
 
 								<p>
-									{informations?.editorial_summary?.overview}
+									{information?.editorial_summary?.overview}
 								</p>
 							</div>
 						</div>
