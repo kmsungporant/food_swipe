@@ -103,14 +103,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-												opacity: 0,
-												zIndex: 0,
-												x: -1000,
-												transition: {
-													ease: "easeInOut",
-													delay: 0,
-												},
-											}
+													opacity: 0,
+													zIndex: 0,
+													x: -1000,
+													transition: {
+														ease: "easeInOut",
+														delay: 0,
+													},
+											  }
 									}
 								>
 									Food
@@ -121,14 +121,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-												opacity: 0,
-												zIndex: 0,
-												x: -1000,
-												transition: {
-													ease: "easeInOut",
-													delay: 0.05,
-												},
-											}
+													opacity: 0,
+													zIndex: 0,
+													x: -1000,
+													transition: {
+														ease: "easeInOut",
+														delay: 0.05,
+													},
+											  }
 									}
 								>
 									Swipe
@@ -139,14 +139,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-												opacity: 0,
-												zIndex: 0,
-												x: -1000,
-												transition: {
-													ease: "easeInOut",
-													delay: 0.1,
-												},
-											}
+													opacity: 0,
+													zIndex: 0,
+													x: -1000,
+													transition: {
+														ease: "easeInOut",
+														delay: 0.1,
+													},
+											  }
 									}
 									className="mt-5 text-xl"
 								>
@@ -159,14 +159,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-												opacity: 0,
-												zIndex: 0,
-												x: -1000,
-												transition: {
-													ease: "easeInOut",
-													delay: 0.15,
-												},
-											}
+													opacity: 0,
+													zIndex: 0,
+													x: -1000,
+													transition: {
+														ease: "easeInOut",
+														delay: 0.15,
+													},
+											  }
 									}
 									className="flex justify-end w-full mt-5"
 								>
@@ -189,51 +189,31 @@ export default function Home({
 								mainTitle
 									? ""
 									: {
-										opacity: 1,
-										zIndex: 50,
-										transition: { delay: 0.5 },
-									}
+											opacity: 1,
+											zIndex: 50,
+											transition: { delay: 0.5 },
+									  }
 							}
 						>
 							{render
-								? restaurants?.map((restaurant, i) => (
-									<motion.div
-										animate={controls}
-											onDragEnd={(e, info) => {
-												if (
-													info.point.x <= 200 &&
-													info.point.x >= 200
-												) {
-													console.log("start");
-										// 	} else {
-													// If card is dragged beyond 150
-													// make it disappear
-													// making use of ternary operator
-													console.log("disappear");
-													controls.start({
-										// 			x:
-															info.point.x > 0
-																? 1500
-																: -1500,
-										// 			transition: {
-															duration: 0.75,
-														},
-													});
-												}
-										// }}
-										// dragSnapToOrigin={true}
+								? restaurants?.map((restaurant) => (
+										<motion.div
 											drag="x"
-										dragElastic={0.25}
-										dragTransition={{
-											bounceStiffness: 100,
-										}}
-										key={restaurant.place_id}
-										className="absolute flex justify-center items-center h-full w-full"
-										key={i}
-									>
-										<FoodCard restaurant={restaurant} />
-									</motion.div>
-								))
+											dragConstraints={{
+												left: -150,
+												right: 150,
+											}}
+											dragSnapToOrigin={true}
+											dragElastic={0.25}
+											dragTransition={{
+												bounceStiffness: 100,
+											}}
+											initial={{ scale: 1.0 }}
+											className="absolute flex justify-center items-center h-full w-full"
+										>
+											<FoodCard restaurant={restaurant} />
+										</motion.div>
+								  ))
 								: null}
 						</motion.div>
 					</div>
