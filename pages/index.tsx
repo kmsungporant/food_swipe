@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
 import FoodCard from "../components/foodCard/foodCard";
 import Footer from "../components/footer";
 import Image from "next/image";
@@ -72,6 +72,7 @@ export default function Home({
 	}, []);
 
 	// Handle food card
+	const controls = useAnimationControls();
 
 	return (
 		<>
@@ -197,17 +198,36 @@ export default function Home({
 							{render
 								? restaurants?.map((restaurant) => (
 										<motion.div
-											drag="x"
-											dragConstraints={{
-												left: -150,
-												right: 150,
+											animate={controls}
+											onDragEnd={(e, info) => {
+												if (
+													info.point.x <= 200 &&
+													info.point.x >= 200
+												) {
+													console.log("start");
+												} else {
+													// If card is dragged beyond 150
+													// make it disappear
+													// making use of ternary operator
+													console.log("disappear");
+													controls.start({
+														x:
+															info.point.x > 0
+																? 1500
+																: -1500,
+														transition: {
+															duration: 0.75,
+														},
+													});
+												}
 											}}
 											dragSnapToOrigin={true}
+											drag="x"
 											dragElastic={0.25}
 											dragTransition={{
 												bounceStiffness: 100,
 											}}
-											initial={{ scale: 1.0 }}
+											key={restaurant.place_id}
 											className="absolute flex justify-center items-center h-full w-full"
 										>
 											<FoodCard restaurant={restaurant} />

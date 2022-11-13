@@ -2,7 +2,11 @@ import { BiDollar } from "react-icons/bi";
 
 export default function FoodCard({ restaurant }: { restaurant: any }) {
 	function getImage() {
-		return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${restaurant.photos![0]?.width}&photo_reference=${restaurant?.photos![0]?.photo_reference}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`;
+		return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${
+			restaurant.photos![0]?.width
+		}&photo_reference=${restaurant?.photos![0]?.photo_reference}&key=${
+			process.env.NEXT_PUBLIC_GOOGLE_API_KEY
+		}`;
 	}
 
 	return (
@@ -12,7 +16,7 @@ export default function FoodCard({ restaurant }: { restaurant: any }) {
 					<span className="text-3xl font-black flex justify-center ">
 						{restaurant.name}
 					</span>
-					<div className=" flex justify-start w-full overflow-hidden rounded-3xl">
+					<div className=" flex justify-start w-[90%] h-[300px]  overflow-hidden rounded-3xl">
 						<img
 							draggable="false"
 							height="100%"
