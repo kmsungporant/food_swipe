@@ -5,6 +5,8 @@ import { motion, MotionConfig, useAnimationControls } from "framer-motion";
 import { TbCurrencyDollar } from "react-icons/tb";
 import { Restaurant } from "../../pages/api/types";
 import { useRouter } from "next/router";
+import { FaLocationArrow, FaMoneyBillAlt } from "react-icons/fa"
+import { AiFillStar, AiFillClockCircle } from "react-icons/ai"
 
 export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 	const router = useRouter()
@@ -100,7 +102,8 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 									{restaurant.name}
 								</span>
 								<span className="h-[2px] bg-black" />
-								<span>
+								<span className="flex flex-row items-center gap-x-1">
+									<AiFillClockCircle />Operating Hours:
 									{restaurant?.opening_hours?.open_now ? (
 										<span className="text-green-700 font-black underline">
 											Open
@@ -111,19 +114,25 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 										</span>
 									)}
 								</span>
-								<span>Rating: {restaurant.rating}/5</span>
-								<span className=" flex flex-row text-green-600 items-center">
-									<span className=" text-black">
-										Price Range:
-									</span>{" "}
-									{Array(restaurant.price_level).fill(
-										<TbCurrencyDollar className="text-lg" />
-									)}
+								<span className="flex flex-row items-center gap-x-1">
+									<FaLocationArrow /> {restaurant.vicinity}
 								</span>
 								<span className="flex items-center flex-row gap-x-1">
 									<BsTelephoneFill />{" "}
 									{information?.formatted_phone_number}
 								</span>
+								<span className="flex flex-row items-center gap-x-1">
+									<AiFillStar />Rating: {restaurant.rating}/5</span>
+								<span className=" flex flex-row text-green-600 items-center">
+									<span className="flex flex-row items-center gap-x-1 text-black">
+										<FaMoneyBillAlt />
+										Price Range:
+									</span>
+									{Array(restaurant.price_level).fill(
+										<TbCurrencyDollar className="text-lg" />
+									)}
+								</span>
+
 
 								<p>
 									<span className="text-lg">
