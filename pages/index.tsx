@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { useEffect, useState } from "react";
 import { Restaurant } from "./api/types";
 
-
 export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, setMainTitle: any }) {
   // Coordinates (coordinates[0] = latitude, coordinates[1] = longitude)
   const [coordinates, setCoordinates] = useState<Number[]>([]);
@@ -15,6 +14,7 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
   const [currRestaurants, setCurrRestaurants] = useState(restaurants.slice(0, 3));
 
   //const [details, setDetails] = useState<Restaurant[]>([]);
+
 
   // Axios config
   var axios = require("axios");
@@ -28,6 +28,7 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
     if (coordinates[0] != null) {
       console.log("Latitude is " + coordinates[0]);
       console.log("Longitude is " + coordinates[1]);
+      console.log(currRestaurants);
       // Calls API
       axios(config)
         .then(function (response: any) {
@@ -40,7 +41,10 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
     }
   }, [coordinates]);
 
+  useEffect(() => {
+    setCurrRestaurants(restaurants.slice(0, 3));
 
+  }, [restaurants])
 
   // On mount, ask for user coordinates
   useEffect(() => {
@@ -56,12 +60,7 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
     }
   }, []);
 
-  // Card handling
-  
-
-
-
-  // End card handling
+  // Returns image from restaurant[index]
   
 
 
@@ -93,13 +92,12 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
           </div>
           <div className="absolute w-2/5">
             <motion.div initial={{ opacity: 0, zIndex: 0 }} animate={mainTitle ? "" : { opacity: 1, zIndex: 50, transition: { delay: 0.5 } }} >
-              {restaurants.map((restaurant, i) => (
+              {currRestaurants.map((restaurant, i) => (
                 <motion.div drag="x"
                   dragConstraints={{ left: -150, right: 150 }}
                   dragSnapToOrigin={true}
-                  dragElastic={1}
-                  dragTransition={{ bounceStiffness: 10, bounceDamping: 5 }}
-                  whileDrag={{ scale: 1.1 }}
+                  dragElastic={0.25}
+                  dragTransition={{ bounceStiffness: 100 }}
                   initial={{ scale: 1.0 }} key={i} className="absolute flex justify-center items-center h-full w-full">
                   <FoodCard restaurant={restaurant} />
                 </motion.div>
@@ -115,4 +113,3 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
 
   )
 }
-
