@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { AiFillPhone } from "react-icons/ai";
+import { BsTelephoneFill } from "react-icons/bs";
 import { Information } from "../../pages/api/type2";
 import { motion, MotionConfig, useAnimationControls } from "framer-motion";
-import { BiDollar } from "react-icons/bi";
+import { TbCurrencyDollar } from "react-icons/tb";
 import { Restaurant } from "../../pages/api/types";
 
 export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
@@ -23,6 +23,8 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 			controls.start({
 				x: -2000,
 				transition: { duration: 0.5 },
+				opacity: 0,
+				rotate: -70,
 			});
 		} else {
 			controls.start({ x: 0 });
@@ -87,7 +89,7 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 							</div>
 
 							<div className="flex flex-col gap-y-2">
-								<span className="h-full  text-3xl font-black w-full ">
+								<span className="h-full  text-3xl font-black w-full text-center">
 									{restaurant.name}
 								</span>
 								<span className="h-[2px] bg-black" />
@@ -102,19 +104,17 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 										</span>
 									)}
 								</span>
-								<span>
-									Rating: {restaurant.rating} out of 5
-								</span>
-								<span className="text-xl flex flex-row text-yellow-500 items-center">
-									<span className="text-lg">
+								<span>Rating: {restaurant.rating}/5</span>
+								<span className=" flex flex-row text-green-600 items-center">
+									<span className=" text-black">
 										Price Range:
 									</span>{" "}
 									{Array(restaurant.price_level).fill(
-										<BiDollar className="" />
+										<TbCurrencyDollar className="text-lg" />
 									)}
 								</span>
-								<span className="  flex items-center flex-row gap-x-1">
-									<AiFillPhone />{" "}
+								<span className="flex items-center flex-row gap-x-1">
+									<BsTelephoneFill />{" "}
 									{information?.formatted_phone_number}
 								</span>
 
