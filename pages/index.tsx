@@ -92,25 +92,25 @@ export default function Home({
 			{/* <motion.div initial={{ opacity: 1 }} animate={mainTitle ? { opacity: 0 } : { opacity: 1 }}>
         <Image src="/backgroundCard.jpg" alt="background card picture" layout="fill" objectFit="cover" objectPosition="center" />
       </motion.div> */}
-			<div className="relative z-10 h-full min-h-full  transition-colors text-white">
+			<div className="relative z-10 h-full min-h-full  transition-colors text-white overflow-x-hidden">
 				<div className="flex relative items-center justify-center h-full">
 					<div className="absolute">
-						<div className={`flex flex-col items-center justify-center w-full h-full ${mainTitle ? `` : `pointer-events-none`}`}>
-							<div className="flex flex-col w-4/5 font-serif text-6xl font-black text-right">
+						<div className="flex flex-col items-center justify-center w-full h-full">
+							<div className={`flex flex-col w-4/5 font-serif text-6xl font-black text-right ${mainTitle ? `` : `select-none`}`}>
 								<motion.span
 									initial={{ opacity: 1, zIndex: 50 }}
 									animate={
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0,
+												},
+											}
 									}
 								>
 									Food
@@ -121,14 +121,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0.05,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0.05,
+												},
+											}
 									}
 								>
 									Swipe
@@ -139,14 +139,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0.1,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0.1,
+												},
+											}
 									}
 									className="mt-5 text-xl"
 								>
@@ -159,14 +159,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0.15,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0.15,
+												},
+											}
 									}
 									className="flex justify-end w-full mt-5"
 								>
@@ -189,31 +189,31 @@ export default function Home({
 								mainTitle
 									? ""
 									: {
-											opacity: 1,
-											zIndex: 50,
-											transition: { delay: 0.5 },
-									  }
+										opacity: 1,
+										zIndex: 50,
+										transition: { delay: 0.5 },
+									}
 							}
 						>
 							{render
 								? restaurants?.map((restaurant) => (
-										<motion.div
-											drag="x"
-											dragConstraints={{
-												left: -150,
-												right: 150,
-											}}
-											dragSnapToOrigin={true}
-											dragElastic={0.25}
-											dragTransition={{
-												bounceStiffness: 100,
-											}}
-											initial={{ scale: 1.0 }}
-											className="absolute flex justify-center items-center h-full w-full"
-										>
-											<FoodCard restaurant={restaurant} />
-										</motion.div>
-								  ))
+									<motion.div
+										drag="x"
+										// dragConstraints={{
+										// 	left: -150,
+										// 	right: 150,
+										// }}
+										// dragSnapToOrigin={true}
+										dragElastic={0.25}
+										dragTransition={{
+											bounceStiffness: 100,
+										}}
+										initial={{ scale: 1.0 }}
+										className="absolute flex justify-center items-center h-full w-full"
+									>
+										<FoodCard restaurant={restaurant} />
+									</motion.div>
+								))
 								: null}
 						</motion.div>
 					</div>
