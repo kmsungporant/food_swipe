@@ -95,7 +95,11 @@ export default function Home({
 			<div className="relative z-10 h-full min-h-full  transition-colors text-white">
 				<div className="flex relative items-center justify-center h-full">
 					<div className="absolute">
-						<div className={`flex flex-col items-center justify-center w-full h-full ${mainTitle ? `` : `pointer-events-none`}`}>
+						<div
+							className={`flex flex-col items-center justify-center w-full h-full ${
+								mainTitle ? `` : `pointer-events-none`
+							}`}
+						>
 							<div className="flex flex-col w-4/5 font-serif text-6xl font-black text-right">
 								<motion.span
 									initial={{ opacity: 1, zIndex: 50 }}
@@ -198,12 +202,32 @@ export default function Home({
 							{render
 								? restaurants?.map((restaurant) => (
 										<motion.div
-											drag="x"
-											dragConstraints={{
-												left: -150,
-												right: 150,
+											onDragEnd={(e, info) => {
+												if (
+													info.offset.x < -250 ||
+													info.offset.x > 250
+												) {
+													controls.start({
+														x:
+															info.offset.x < 0
+																? -1000
+																: 1000,
+														opacity: 0,
+														transition: {
+															duration: 3,
+															type: "easeInOut",
+														},
+													});
+												}
 											}}
-											dragSnapToOrigin={true}
+											animate={controls}
+											key={restaurant.place_id}
+											drag="x"
+											// dragConstraints={{
+											// 	left: -150,
+											// 	right: 150,
+											// }}
+											// dragSnapToOrigin={true}
 											dragElastic={0.25}
 											dragTransition={{
 												bounceStiffness: 100,
