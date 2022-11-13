@@ -4,6 +4,7 @@ import Footer from "../components/footer";
 import Image from "next/legacy/image";
 import { useEffect, useState } from "react";
 import { Restaurant } from "./api/types";
+import { Information } from "./api/type2";
 
 export default function Home({
 	mainTitle,
@@ -24,9 +25,11 @@ export default function Home({
 	var axios2 = require("axios");
 	var config2 = {
 		method: "get",
-		url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${restaurants![0]?.place_id
-			}&fields=editorial_summary,website,formatted_phone_number&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY
-			}`,
+		url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${
+			restaurants![0]?.place_id
+		}&fields=editorial_summary,website,formatted_phone_number&key=${
+			process.env.NEXT_PUBLIC_GOOGLE_API_KEY
+		}`,
 	};
 
 	useEffect(() => {
@@ -81,8 +84,6 @@ export default function Home({
 		}
 	}, [restaurants]);
 
-
-
 	return (
 		<>
 			<motion.div
@@ -102,8 +103,9 @@ export default function Home({
 				<div className="flex relative items-center justify-center h-full">
 					<div className="absolute">
 						<div
-							className={`flex flex-col items-center justify-center w-full h-full ${mainTitle ? `` : `pointer-events-none`
-								}`}
+							className={`flex flex-col items-center justify-center w-full h-full ${
+								mainTitle ? `` : `pointer-events-none`
+							}`}
 						>
 							<div className="flex flex-col w-4/5 font-serif text-6xl font-black text-right">
 								<motion.span
@@ -112,14 +114,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-												opacity: 0,
-												zIndex: 0,
-												x: -1000,
-												transition: {
-													ease: "easeInOut",
-													delay: 0,
-												},
-											}
+													opacity: 0,
+													zIndex: 0,
+													x: -1000,
+													transition: {
+														ease: "easeInOut",
+														delay: 0,
+													},
+											  }
 									}
 								>
 									Food
@@ -130,14 +132,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-												opacity: 0,
-												zIndex: 0,
-												x: -1000,
-												transition: {
-													ease: "easeInOut",
-													delay: 0.05,
-												},
-											}
+													opacity: 0,
+													zIndex: 0,
+													x: -1000,
+													transition: {
+														ease: "easeInOut",
+														delay: 0.05,
+													},
+											  }
 									}
 								>
 									Swipe
@@ -148,14 +150,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-												opacity: 0,
-												zIndex: 0,
-												x: -1000,
-												transition: {
-													ease: "easeInOut",
-													delay: 0.1,
-												},
-											}
+													opacity: 0,
+													zIndex: 0,
+													x: -1000,
+													transition: {
+														ease: "easeInOut",
+														delay: 0.1,
+													},
+											  }
 									}
 									className="mt-5 text-xl"
 								>
@@ -168,14 +170,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-												opacity: 0,
-												zIndex: 0,
-												x: -1000,
-												transition: {
-													ease: "easeInOut",
-													delay: 0.15,
-												},
-											}
+													opacity: 0,
+													zIndex: 0,
+													x: -1000,
+													transition: {
+														ease: "easeInOut",
+														delay: 0.15,
+													},
+											  }
 									}
 									className="flex justify-end w-full mt-5"
 								>
@@ -198,10 +200,10 @@ export default function Home({
 								mainTitle
 									? ""
 									: {
-										opacity: 1,
-										zIndex: 50,
-										transition: { delay: 0.5 },
-									}
+											opacity: 1,
+											zIndex: 50,
+											transition: { delay: 0.5 },
+									  }
 							}
 						>
 							{render ? (
@@ -216,12 +218,11 @@ export default function Home({
 									No restaurants available near you! Sorry :(
 								</div>
 							)}
-						</motion.div >
-					</div >
-				</div >
-				{mainTitle ? <></> : <Footer />
-				}
-			</div >
+						</motion.div>
+					</div>
+				</div>
+				{mainTitle ? <></> : <Footer />}
+			</div>
 		</>
 	);
 }
