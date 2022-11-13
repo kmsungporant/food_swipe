@@ -1,5 +1,6 @@
 import { BiDollar } from "react-icons/bi";
 
+
 export default function FoodCard({ restaurant }: { restaurant: any }) {
 	function getImage() {
 		return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${
@@ -59,6 +60,7 @@ export default function FoodCard({ restaurant }: { restaurant: any }) {
 						</div>
 
 					</div>
+
 
 				</div>
 			</div>

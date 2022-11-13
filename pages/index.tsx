@@ -4,6 +4,7 @@ import Footer from "../components/footer";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Restaurant } from "./api/types";
+import { Information } from "./api/type2";
 
 export default function Home({
 	mainTitle,
@@ -19,11 +20,29 @@ export default function Home({
 	const [currRestaurants, setCurrRestaurants] = useState<Restaurant[]>(
 		restaurants.slice(0, 10)
 	);
+    const [informations, setInformations] = useState<Information>();
+
 	// Boolean
 	const [render, setRender] = useState<boolean>(false);
 
-	//const [details, setDetails] = useState<Restaurant[]>([]);
+  var axios2 = require("axios");
+  var config2 = {
+    method: "get",
+    url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${restaurants![0]?.place_id}&fields=editorial_summary,website,formatted_phone_number&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
+  };
 
+  useEffect(
+    () => {
+        axios2(config2)
+          .then(function (response: any) {
+            setInformations(response?.data?.result);
+          })
+          .catch(function (error: any) {
+            console.log(error);
+          });
+      
+    }, []);
+  
 	// Axios config
 	var axios = require("axios");
 	var config = {
