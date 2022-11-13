@@ -94,7 +94,7 @@ export default function Home({
 			<div className="relative z-10 h-full min-h-full  transition-colors text-white">
 				<div className="flex relative items-center justify-center h-full">
 					<div className="absolute">
-						<div className="flex flex-col items-center justify-center w-full h-full">
+						<div className="flex flex-col items-center justify-center w-full h-full pointer-events-none">
 							<div className="flex flex-col w-4/5 font-serif text-6xl font-black text-right">
 								<motion.span
 									initial={{ opacity: 1, zIndex: 50 }}
