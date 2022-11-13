@@ -40,11 +40,9 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 	};
 
 	function getImage() {
-		return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${
-			restaurant.photos![0]?.width
-		}&photo_reference=${restaurant?.photos![0]?.photo_reference}&key=${
-			process.env.NEXT_PUBLIC_GOOGLE_API_KEY
-		}`;
+		return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${restaurant.photos![0]?.width
+			}&photo_reference=${restaurant?.photos![0]?.photo_reference}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY
+			}`;
 	}
 
 	useEffect(() => {
@@ -77,7 +75,7 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 				<div className="h-[40rem] font-serif cursor-grab">
 					<div className="h-full w-full bg-white text-black flex flex-col rounded-3xl p-3 gap-y-1 ">
 						<div className=" w-full h-full">
-							<div className="h-1/2 flex relative mb-5">
+							<div className="h-1/2 flex relative mb-5 justify-center">
 								<div className="flex justify-center h-full items-center overflow-hidden object-fill rounded-3xl">
 									<img
 										draggable="false"
@@ -119,7 +117,9 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 								</span>
 
 								<p>
-									{information?.editorial_summary?.overview}
+									<span className="text-lg">
+										{information?.editorial_summary?.overview}
+									</span>
 								</p>
 							</div>
 						</div>
