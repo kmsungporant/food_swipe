@@ -28,7 +28,7 @@ export default function Home({
 	var axios = require("axios");
 	var config = {
 		method: "get",
-		url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coordinates[0]}%2C${coordinates[1]}&radius=1000&type=restaurant&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
+		url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coordinates[0]}%2C${coordinates[1]}&radius=5000&type=restaurant&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
 	};
 
 	// Fetches data from Places API and stores restaurant data.
@@ -102,14 +102,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0,
+												},
+											}
 									}
 								>
 									Food
@@ -120,14 +120,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0.05,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0.05,
+												},
+											}
 									}
 								>
 									Swipe
@@ -138,14 +138,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0.1,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0.1,
+												},
+											}
 									}
 									className="mt-5 text-xl"
 								>
@@ -158,14 +158,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0.15,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0.15,
+												},
+											}
 									}
 									className="flex justify-end w-full mt-5"
 								>
@@ -188,31 +188,31 @@ export default function Home({
 								mainTitle
 									? ""
 									: {
-											opacity: 1,
-											zIndex: 50,
-											transition: { delay: 0.5 },
-									  }
+										opacity: 1,
+										zIndex: 50,
+										transition: { delay: 0.5 },
+									}
 							}
 						>
 							{render
 								? restaurants?.map((restaurant) => (
-										<motion.div
-											drag="x"
-											dragConstraints={{
-												left: -150,
-												right: 150,
-											}}
-											dragSnapToOrigin={true}
-											dragElastic={0.25}
-											dragTransition={{
-												bounceStiffness: 100,
-											}}
-											initial={{ scale: 1.0 }}
-											className="absolute flex justify-center items-center h-full w-full"
-										>
-											<FoodCard restaurant={restaurant} />
-										</motion.div>
-								  ))
+									<motion.div
+										drag="x"
+										// dragConstraints={{
+										// 	left: -150,
+										// 	right: 150,
+										// }}
+										// dragSnapToOrigin={true}
+										dragElastic={0.25}
+										dragTransition={{
+											bounceStiffness: 100,
+										}}
+										initial={{ scale: 1.0 }}
+										className="absolute flex justify-center items-center h-full w-full"
+									>
+										<FoodCard restaurant={restaurant} />
+									</motion.div>
+								))
 								: null}
 						</motion.div>
 					</div>
