@@ -195,7 +195,7 @@ export default function Home({
 							}
 						>
 							{render
-								? restaurants?.map((restaurant) => (
+								? restaurants?.map((restaurant, i) => (
 									<motion.div
 										drag="x"
 										// dragConstraints={{
@@ -209,6 +209,7 @@ export default function Home({
 										}}
 										initial={{ scale: 1.0 }}
 										className="absolute flex justify-center items-center h-full w-full"
+										key={i}
 									>
 										<FoodCard restaurant={restaurant} />
 									</motion.div>
