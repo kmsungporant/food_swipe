@@ -10,11 +10,9 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
   const [coordinates, setCoordinates] = useState<Number[]>([]);
   // Restaurants
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-  const [currentCard, setCurrentCard] = useState(0);
   const [currRestaurants, setCurrRestaurants] = useState(restaurants.slice(0, 3));
 
   //const [details, setDetails] = useState<Restaurant[]>([]);
-
 
   // Axios config
   var axios = require("axios");
@@ -60,7 +58,12 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
     }
   }, []);
 
-  // Returns image from restaurant[index]
+  // Card handling
+  
+
+
+
+  // End card handling
   
 
 
