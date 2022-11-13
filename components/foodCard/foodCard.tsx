@@ -4,8 +4,15 @@ import { Information } from "../../pages/api/type2";
 import { motion, MotionConfig, useAnimationControls } from "framer-motion";
 import { TbCurrencyDollar } from "react-icons/tb";
 import { Restaurant } from "../../pages/api/types";
+import { useRouter } from "next/router";
 
 export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
+	const router = useRouter()
+
+	const handleUser = () => {
+		router.push(`${information?.website}`)
+	}
+
 	// Handle food card
 	const controls = useAnimationControls();
 	const handleDragEnd = (event: any, info: any) => {
@@ -16,6 +23,8 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 				scale: 1.1,
 				transition: { duration: 0.2 },
 			});
+			handleUser();
+
 		}
 		// Swiping left
 		else if (info?.offset?.x < -200) {
