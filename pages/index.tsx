@@ -1,7 +1,7 @@
-import { motion, useAnimationControls } from "framer-motion";
+import { motion } from "framer-motion";
 import FoodCard from "../components/foodCard/foodCard";
 import Footer from "../components/footer";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useEffect, useState } from "react";
 import { Restaurant } from "./api/types";
 
@@ -16,17 +16,24 @@ export default function Home({
 	const [coordinates, setCoordinates] = useState<Number[]>([]);
 	// Restaurants
 	const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-	const [currRestaurants, setCurrRestaurants] = useState<Restaurant[]>(
-		restaurants.slice(0, 10)
-	);
+
 
 	// Boolean
 	const [render, setRender] = useState<boolean>(false);
+
+	var axios2 = require("axios");
+	var config2 = {
+		method: "get",
+		url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${restaurants![0]?.place_id
+			}&fields=editorial_summary,website,formatted_phone_number&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY
+			}`,
+	};
+
 	// Axios config
 	var axios = require("axios");
 	var config = {
 		method: "get",
-		url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coordinates[0]}%2C${coordinates[1]}&radius=5000&type=restaurant&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
+		url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coordinates[0]}%2C${coordinates[1]}&radius=1500&type=restaurant&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
 	};
 
 	// On mount, ask for user coordinates
@@ -57,18 +64,14 @@ export default function Home({
 		}
 	}, [coordinates]);
 
+	// Sets render to true if restaurants array is not empty
 	useEffect(() => {
-		if (restaurants[0] != null) {
-			setCurrRestaurants(restaurants.slice(0, 10));
+		if (restaurants.length > 0) {
 			setRender(true);
-			console.log("Rendered");
 		}
 	}, [restaurants]);
 
 
-
-	// Handle food card
-	const controls = useAnimationControls();
 
 	return (
 		<>
@@ -85,7 +88,6 @@ export default function Home({
 					objectPosition="center"
 				/>
 			</motion.div>
-
 			<div className="relative z-10 h-full min-h-full  transition-colors text-white overflow-x-hidden">
 				<div className="flex relative items-center justify-center h-full">
 					<div className="absolute">
@@ -192,31 +194,24 @@ export default function Home({
 									}
 							}
 						>
-							{render
-								? restaurants?.map((restaurant, informations) => (
-									<motion.div
-										drag="x"
-										dragConstraints={{
-											left: -150,
-											right: 150,
-										}}
-										dragSnapToOrigin={true}
-										dragElastic={0.25}
-										dragTransition={{
-											bounceStiffness: 100,
-										}}
-										initial={{ scale: 1.0 }}
-										className="absolute flex justify-center items-center h-full w-full"
-									>
-										<FoodCard restaurant={restaurant} />
-									</motion.div>
+							{render ? (
+								restaurants?.map((restaurant, index) => (
+									<FoodCard
+										key={index}
+										restaurant={restaurant}
+									/>
 								))
-								: null}
-						</motion.div>
-					</div>
-				</div>
-				{mainTitle ? <></> : <Footer />}
-			</div>
+							) : (
+								<div className="text-white text-7xl">
+									No restaurants available near you! Sorry :(
+								</div>
+							)}
+						</motion.div >
+					</div >
+				</div >
+				{mainTitle ? <></> : <Footer />
+				}
+			</div >
 		</>
 	);
 }
