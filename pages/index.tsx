@@ -92,7 +92,7 @@ export default function Home({
 			{/* <motion.div initial={{ opacity: 1 }} animate={mainTitle ? { opacity: 0 } : { opacity: 1 }}>
         <Image src="/backgroundCard.jpg" alt="background card picture" layout="fill" objectFit="cover" objectPosition="center" />
       </motion.div> */}
-			<div className="relative z-10 h-full min-h-full  transition-colors text-white">
+			<div className="relative z-10 h-full min-h-full  transition-colors text-white overflow-x-hidden">
 				<div className="flex relative items-center justify-center h-full">
 					<div className="absolute">
 						<div
@@ -107,14 +107,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0,
+												},
+											}
 									}
 								>
 									Food
@@ -125,14 +125,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0.05,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0.05,
+												},
+											}
 									}
 								>
 									Swipe
@@ -143,14 +143,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0.1,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0.1,
+												},
+											}
 									}
 									className="mt-5 text-xl"
 								>
@@ -163,14 +163,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0.15,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0.15,
+												},
+											}
 									}
 									className="flex justify-end w-full mt-5"
 								>
@@ -193,41 +193,21 @@ export default function Home({
 								mainTitle
 									? ""
 									: {
-											opacity: 1,
-											zIndex: 50,
-											transition: { delay: 0.5 },
-									  }
+										opacity: 1,
+										zIndex: 50,
+										transition: { delay: 0.5 },
+									}
 							}
 						>
 							{render
 								? restaurants?.map((restaurant) => (
 										<motion.div
-											onDragEnd={(e, info) => {
-												if (
-													info.offset.x < -250 ||
-													info.offset.x > 250
-												) {
-													controls.start({
-														x:
-															info.offset.x < 0
-																? -1000
-																: 1000,
-														opacity: 0,
-														transition: {
-															duration: 3,
-															type: "easeInOut",
-														},
-													});
-												}
-											}}
-											animate={controls}
-											key={restaurant.place_id}
 											drag="x"
-											// dragConstraints={{
-											// 	left: -150,
-											// 	right: 150,
-											// }}
-											// dragSnapToOrigin={true}
+											dragConstraints={{
+												left: -150,
+												right: 150,
+											}}
+											dragSnapToOrigin={true}
 											dragElastic={0.25}
 											dragTransition={{
 												bounceStiffness: 100,
