@@ -11,7 +11,7 @@ export default function FoodCard({ restaurant }: { restaurant: any }) {
 
 	return (
 		<>
-			<div className="h-[40rem] font-serif">
+			<div className="h-[40rem] font-serif cursor-grab">
 				<div className="h-full w-full bg-white text-black flex flex-col rounded-3xl p-3 gap-y-1 ">
 					<div className=" w-full h-full">
 						<div className="h-1/2 flex relative mb-5">

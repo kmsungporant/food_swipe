@@ -96,7 +96,7 @@ export default function Home({
 				<div className="flex relative items-center justify-center h-full">
 					<div className="absolute">
 						<div className="flex flex-col items-center justify-center w-full h-full">
-							<div className={`flex flex-col w-4/5 font-serif text-6xl font-black text-right ${mainTitle ? `` : `select-none`}`}>
+							<div className={`flex flex-col w-4/5 font-serif text-6xl font-black text-right cursor-default ${mainTitle ? `` : `select-none `}`}>
 								<motion.span
 									initial={{ opacity: 1, zIndex: 50 }}
 									animate={
