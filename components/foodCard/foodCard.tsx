@@ -12,8 +12,10 @@ export default function FoodCard({ restaurant }: { restaurant: any }) {
             <div className="">
                 <div className="h-full w-full bg-black flex flex-col rounded-3xl p-3 gap-y-2 ">
                     <span className="text-3xl font-black flex justify-center ">{restaurant.name}</span>
-                    <div className=" flex justify-start w-full overflow-hidden rounded-3xl">
-                        <img draggable="false" height="100%" width="100%" src={getImage()} />
+                    <div className=" flex w-full justify-center  ">
+                        <div className="flex w-4/5 overflow-hidden rounded-3xl">
+                            <img draggable="false" height="100%" width="100%" src={getImage()} />
+                        </div>
                     </div>
                     <span>
                         Now {restaurant.opening_hours.open_now ? <span className="text-green-700 font-black underline">Opened</span> : <span className="text-red-700 font-black underline">Closed</span>}
