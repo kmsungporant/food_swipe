@@ -96,9 +96,8 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
                 <motion.div drag="x"
                   dragConstraints={{ left: -150, right: 150 }}
                   dragSnapToOrigin={true}
-                  dragElastic={1}
-                  dragTransition={{ bounceStiffness: 10, bounceDamping: 5 }}
-                  whileDrag={{ scale: 1.1 }}
+                  dragElastic={0.25}
+                  dragTransition={{ bounceStiffness: 100 }}
                   initial={{ scale: 1.0 }} key={i} className="absolute flex justify-center items-center h-full w-full">
                   <FoodCard restaurant={restaurant} />
                 </motion.div>
