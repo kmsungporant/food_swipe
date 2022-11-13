@@ -170,7 +170,7 @@ export default function Home({
 									className="flex justify-end w-full mt-5"
 								>
 									<button
-										className="flex justify-center p-3 text-lg text-black bg-white rounded-full w-36"
+										className="flex justify-center p-3 text-lg text-black hover:bg-white/80 bg-white rounded-full w-36"
 										onClick={() => {
 											setMainTitle(false);
 										}}
