@@ -17,7 +17,7 @@ export default function Home({
 	const [coordinates, setCoordinates] = useState<Number[]>([]);
 	// Restaurants
 	const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-	const [informations, setInformations] = useState<Information>();
+	const [information, setInformation] = useState<Information>();
 
 	// Boolean
 	const [render, setRender] = useState<boolean>(false);
@@ -35,7 +35,7 @@ export default function Home({
 	useEffect(() => {
 		axios2(config2)
 			.then(function (response: any) {
-				setInformations(response?.data?.result);
+				setInformation(response?.data?.result);
 			})
 			.catch(function (error: any) {
 				console.log(error);
