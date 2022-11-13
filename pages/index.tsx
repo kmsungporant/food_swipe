@@ -17,7 +17,7 @@ export default function Home({
 	// Restaurants
 	const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
 	const [currRestaurants, setCurrRestaurants] = useState<Restaurant[]>(
-		restaurants.slice(0, 3)
+		restaurants.slice(0, 10)
 	);
 	// Boolean
 	const [render, setRender] = useState<boolean>(false);
@@ -52,7 +52,7 @@ export default function Home({
 
 	useEffect(() => {
 		if (restaurants[0] != null) {
-			setCurrRestaurants(restaurants.slice(0, 3));
+			setCurrRestaurants(restaurants.slice(0, 10));
 			setRender(true);
 			console.log("Rendered");
 		}
@@ -94,7 +94,7 @@ export default function Home({
 			<div className="relative z-10 h-full min-h-full  transition-colors text-white">
 				<div className="flex relative items-center justify-center h-full">
 					<div className="absolute">
-						<div className="flex flex-col items-center justify-center w-full h-full pointer-events-none">
+						<div className={`flex flex-col items-center justify-center w-full h-full ${mainTitle ? `` : `pointer-events-none`}`}>
 							<div className="flex flex-col w-4/5 font-serif text-6xl font-black text-right">
 								<motion.span
 									initial={{ opacity: 1, zIndex: 50 }}
