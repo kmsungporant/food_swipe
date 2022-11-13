@@ -11,6 +11,7 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
   // Restaurants
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [currentCard, setCurrentCard] = useState(0);
+  const [currRestaurants, setCurrRestaurants] = useState(restaurants.slice(0, 3));
 
   //const [details, setDetails] = useState<Restaurant[]>([]);
 
@@ -27,6 +28,7 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
     if (coordinates[0] != null) {
       console.log("Latitude is " + coordinates[0]);
       console.log("Longitude is " + coordinates[1]);
+      console.log(currRestaurants);
       // Calls API
       axios(config)
         .then(function (response: any) {
@@ -39,6 +41,11 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
     }
   }, [coordinates]);
 
+  useEffect(() => {
+    setCurrRestaurants(restaurants.slice(0, 3));
+
+  }, [restaurants])
+
   // On mount, ask for user coordinates
   useEffect(() => {
     if (coordinates[0] == null) {
@@ -49,19 +56,18 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
           position.coords.longitude,
         ]);
       });
+
     }
   }, []);
 
   // Returns image from restaurant[index]
-  function getImage(index: number) {
-    return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${restaurants[index].photos![0].width}$maxheight=${restaurants[index].photos![0].height}&photo_reference=${restaurants[index].photos![0].photo_reference}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`;
-  }
+  
 
 
   return (
     <>
       <motion.div initial={{ opacity: 1 }} animate={mainTitle ? {} : { opacity: 0 }}>
-        <Image src="/main.jpg" alt="main picture" layout="fill" objectFit="cover" objectPosition="center" />
+        <Image draggable="false" src="/main.jpg" alt="main picture" layout="fill" objectFit="cover" objectPosition="center" />
       </motion.div>
       {/* <motion.div initial={{ opacity: 1 }} animate={mainTitle ? { opacity: 0 } : { opacity: 1 }}>
         <Image src="/backgroundCard.jpg" alt="background card picture" layout="fill" objectFit="cover" objectPosition="center" />
@@ -84,12 +90,18 @@ export default function Home({ mainTitle, setMainTitle }: { mainTitle: boolean, 
               </div>
             </div>
           </div>
-          <div className="absolute">
-            <motion.div initial={{ opacity: 0, zIndex: 0 }} animate={mainTitle ? "" : { opacity: 1, zIndex: 50, transition: { delay: 0.5 } }} className=" flex items-center justify-center w-full h-full drop-shadow-2xl">
-              {restaurants.map((restaurants, i) => (
-                <div key={i} className="absolute h-full flex">
-                  {currentCard == i ? <FoodCard restaurants={restaurants} /> : <></>}
-                </div>
+          <div className="absolute w-2/5">
+            <motion.div initial={{ opacity: 0, zIndex: 0 }} animate={mainTitle ? "" : { opacity: 1, zIndex: 50, transition: { delay: 0.5 } }} >
+              {currRestaurants.map((restaurant, i) => (
+                <motion.div drag="x"
+                  dragConstraints={{ left: -150, right: 150 }}
+                  dragSnapToOrigin={true}
+                  dragElastic={1}
+                  dragTransition={{ bounceStiffness: 10, bounceDamping: 5 }}
+                  whileDrag={{ scale: 1.1 }}
+                  initial={{ scale: 1.0 }} key={i} className="absolute flex justify-center items-center h-full w-full">
+                  <FoodCard restaurant={restaurant} />
+                </motion.div>
               ))}
             </motion.div>
 
