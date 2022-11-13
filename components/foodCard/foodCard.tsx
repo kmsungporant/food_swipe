@@ -5,15 +5,15 @@ import { motion, MotionConfig, useAnimationControls } from "framer-motion";
 import { TbCurrencyDollar } from "react-icons/tb";
 import { Restaurant } from "../../pages/api/types";
 import { useRouter } from "next/router";
-import { FaLocationArrow, FaMoneyBillAlt } from "react-icons/fa"
-import { AiFillStar, AiFillClockCircle } from "react-icons/ai"
+import { FaLocationArrow, FaMoneyBillAlt } from "react-icons/fa";
+import { AiFillStar, AiFillClockCircle } from "react-icons/ai";
 
 export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
-	const router = useRouter()
+	const router = useRouter();
 
 	const handleUser = () => {
-		router.push(`${information?.website}`)
-	}
+		router.push(`${information?.website}`);
+	};
 
 	// Handle food card
 	const controls = useAnimationControls();
@@ -26,7 +26,6 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 				transition: { duration: 0.2 },
 			});
 			handleUser();
-
 		}
 		// Swiping left
 		else if (info?.offset?.x < -200) {
@@ -51,9 +50,11 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 	};
 
 	function getImage() {
-		return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${restaurant.photos![0]?.width
-			}&photo_reference=${restaurant?.photos![0]?.photo_reference}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY
-			}`;
+		return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${
+			restaurant.photos![0]?.width
+		}&photo_reference=${restaurant?.photos![0]?.photo_reference}&key=${
+			process.env.NEXT_PUBLIC_GOOGLE_API_KEY
+		}`;
 	}
 
 	useEffect(() => {
@@ -92,7 +93,11 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 										draggable="false"
 										height="100%"
 										width="100%"
-										src={getImage()}
+										src={
+											restaurant.photos != null
+												? getImage()
+												: "https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000"
+										}
 									/>
 								</div>
 							</div>
@@ -103,7 +108,8 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 								</span>
 								<span className="h-[2px] bg-black" />
 								<span className="flex flex-row items-center gap-x-1">
-									<AiFillClockCircle />Operating Hours:
+									<AiFillClockCircle />
+									Operating Hours:
 									{restaurant?.opening_hours?.open_now ? (
 										<span className="text-green-700 font-black underline">
 											Open
@@ -122,7 +128,9 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 									{information?.formatted_phone_number}
 								</span>
 								<span className="flex flex-row items-center gap-x-1">
-									<AiFillStar />Rating: {restaurant.rating}/5</span>
+									<AiFillStar />
+									Rating: {restaurant.rating}/5
+								</span>
 								<span className=" flex flex-row text-green-600 items-center">
 									<span className="flex flex-row items-center gap-x-1 text-black">
 										<FaMoneyBillAlt />
@@ -133,10 +141,12 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 									)}
 								</span>
 
-
 								<p>
 									<span className="text-lg">
-										{information?.editorial_summary?.overview}
+										{
+											information?.editorial_summary
+												?.overview
+										}
 									</span>
 								</p>
 							</div>
