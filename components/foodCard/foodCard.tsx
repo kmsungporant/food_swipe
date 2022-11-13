@@ -107,8 +107,6 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 							</div>
 						</div>
 					</div>
-
-
 				</div>
 			</div>
 		</motion.div>
