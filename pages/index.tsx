@@ -1,7 +1,7 @@
-import { motion, useAnimationControls } from "framer-motion";
+import { motion } from "framer-motion";
 import FoodCard from "../components/foodCard/foodCard";
 import Footer from "../components/footer";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useEffect, useState } from "react";
 import { Restaurant } from "./api/types";
 
@@ -16,9 +16,6 @@ export default function Home({
 	const [coordinates, setCoordinates] = useState<Number[]>([]);
 	// Restaurants
 	const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-	const [currRestaurants, setCurrRestaurants] = useState<Restaurant[]>(
-		restaurants.slice(0, 10)
-	);
 	// Boolean
 	const [render, setRender] = useState<boolean>(false);
 
@@ -28,16 +25,12 @@ export default function Home({
 	var axios = require("axios");
 	var config = {
 		method: "get",
-		url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coordinates[0]}%2C${coordinates[1]}&radius=5000&type=restaurant&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
+		url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coordinates[0]}%2C${coordinates[1]}&radius=1500&type=restaurant&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
 	};
 
 	// Fetches data from Places API and stores restaurant data.
 	useEffect(() => {
 		if (coordinates[0] != null) {
-			console.log("Latitude is " + coordinates[0]);
-			console.log("Longitude is " + coordinates[1]);
-			console.log(currRestaurants);
-			console.log(restaurants);
 			// Calls API
 			axios(config)
 				.then(function (response: any) {
@@ -50,11 +43,10 @@ export default function Home({
 		}
 	}, [coordinates]);
 
+	// Sets render to true if restaurants array is not empty
 	useEffect(() => {
-		if (restaurants[0] != null) {
-			setCurrRestaurants(restaurants.slice(0, 10));
+		if (restaurants.length > 0) {
 			setRender(true);
-			console.log("Rendered");
 		}
 	}, [restaurants]);
 
@@ -71,9 +63,6 @@ export default function Home({
 		}
 	}, []);
 
-	// Handle food card
-	const controls = useAnimationControls();
-
 	return (
 		<>
 			<motion.div
@@ -89,9 +78,6 @@ export default function Home({
 					objectPosition="center"
 				/>
 			</motion.div>
-			{/* <motion.div initial={{ opacity: 1 }} animate={mainTitle ? { opacity: 0 } : { opacity: 1 }}>
-        <Image src="/backgroundCard.jpg" alt="background card picture" layout="fill" objectFit="cover" objectPosition="center" />
-      </motion.div> */}
 			<div className="relative z-10 h-full min-h-full  transition-colors text-white overflow-x-hidden">
 				<div className="flex relative items-center justify-center h-full">
 					<div className="absolute">
@@ -107,14 +93,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-												opacity: 0,
-												zIndex: 0,
-												x: -1000,
-												transition: {
-													ease: "easeInOut",
-													delay: 0,
-												},
-											}
+													opacity: 0,
+													zIndex: 0,
+													x: -1000,
+													transition: {
+														ease: "easeInOut",
+														delay: 0,
+													},
+											  }
 									}
 								>
 									Food
@@ -125,14 +111,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-												opacity: 0,
-												zIndex: 0,
-												x: -1000,
-												transition: {
-													ease: "easeInOut",
-													delay: 0.05,
-												},
-											}
+													opacity: 0,
+													zIndex: 0,
+													x: -1000,
+													transition: {
+														ease: "easeInOut",
+														delay: 0.05,
+													},
+											  }
 									}
 								>
 									Swipe
@@ -143,14 +129,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-												opacity: 0,
-												zIndex: 0,
-												x: -1000,
-												transition: {
-													ease: "easeInOut",
-													delay: 0.1,
-												},
-											}
+													opacity: 0,
+													zIndex: 0,
+													x: -1000,
+													transition: {
+														ease: "easeInOut",
+														delay: 0.1,
+													},
+											  }
 									}
 									className="mt-5 text-xl"
 								>
@@ -163,14 +149,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-												opacity: 0,
-												zIndex: 0,
-												x: -1000,
-												transition: {
-													ease: "easeInOut",
-													delay: 0.15,
-												},
-											}
+													opacity: 0,
+													zIndex: 0,
+													x: -1000,
+													transition: {
+														ease: "easeInOut",
+														delay: 0.15,
+													},
+											  }
 									}
 									className="flex justify-end w-full mt-5"
 								>
@@ -193,32 +179,24 @@ export default function Home({
 								mainTitle
 									? ""
 									: {
-										opacity: 1,
-										zIndex: 50,
-										transition: { delay: 0.5 },
-									}
+											opacity: 1,
+											zIndex: 50,
+											transition: { delay: 0.5 },
+									  }
 							}
 						>
-							{render
-								? restaurants?.map((restaurant) => (
-										<motion.div
-											drag="x"
-											dragConstraints={{
-												left: -150,
-												right: 150,
-											}}
-											dragSnapToOrigin={true}
-											dragElastic={0.25}
-											dragTransition={{
-												bounceStiffness: 100,
-											}}
-											initial={{ scale: 1.0 }}
-											className="absolute flex justify-center items-center h-full w-full"
-										>
-											<FoodCard restaurant={restaurant} />
-										</motion.div>
-								  ))
-								: null}
+							{render ? (
+								restaurants?.map((restaurant, index) => (
+									<FoodCard
+										key={index}
+										restaurant={restaurant}
+									/>
+								))
+							) : (
+								<div className="text-white text-7xl">
+									No restaurants available near you! Sorry :(
+								</div>
+							)}
 						</motion.div>
 					</div>
 				</div>
