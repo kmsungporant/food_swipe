@@ -28,7 +28,7 @@ export default function Home({
 	var axios = require("axios");
 	var config = {
 		method: "get",
-		url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coordinates[0]}%2C${coordinates[1]}&radius=1000&type=restaurant&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
+		url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coordinates[0]}%2C${coordinates[1]}&radius=5000&type=restaurant&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
 	};
 
 	// Fetches data from Places API and stores restaurant data.
@@ -95,7 +95,7 @@ export default function Home({
 			<div className="relative z-10 h-full min-h-full  transition-colors text-white">
 				<div className="flex relative items-center justify-center h-full">
 					<div className="absolute">
-						<div className="flex flex-col items-center justify-center w-full h-full">
+						<div className="flex flex-col items-center justify-center w-full h-full pointer-events-none">
 							<div className="flex flex-col w-4/5 font-serif text-6xl font-black text-right">
 								<motion.span
 									initial={{ opacity: 1, zIndex: 50 }}
@@ -103,14 +103,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0,
+												},
+											}
 									}
 								>
 									Food
@@ -121,14 +121,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0.05,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0.05,
+												},
+											}
 									}
 								>
 									Swipe
@@ -139,14 +139,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0.1,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0.1,
+												},
+											}
 									}
 									className="mt-5 text-xl"
 								>
@@ -159,14 +159,14 @@ export default function Home({
 										mainTitle
 											? ""
 											: {
-													opacity: 0,
-													zIndex: 0,
-													x: -1000,
-													transition: {
-														ease: "easeInOut",
-														delay: 0.15,
-													},
-											  }
+												opacity: 0,
+												zIndex: 0,
+												x: -1000,
+												transition: {
+													ease: "easeInOut",
+													delay: 0.15,
+												},
+											}
 									}
 									className="flex justify-end w-full mt-5"
 								>
@@ -189,50 +189,51 @@ export default function Home({
 								mainTitle
 									? ""
 									: {
-											opacity: 1,
-											zIndex: 50,
-											transition: { delay: 0.5 },
-									  }
+										opacity: 1,
+										zIndex: 50,
+										transition: { delay: 0.5 },
+									}
 							}
 						>
 							{render
-								? restaurants?.map((restaurant) => (
-										<motion.div
-											animate={controls}
+								? restaurants?.map((restaurant, i) => (
+									<motion.div
+										animate={controls}
 											onDragEnd={(e, info) => {
 												if (
 													info.point.x <= 200 &&
 													info.point.x >= 200
 												) {
 													console.log("start");
-												} else {
+										// 	} else {
 													// If card is dragged beyond 150
 													// make it disappear
 													// making use of ternary operator
 													console.log("disappear");
 													controls.start({
-														x:
+										// 			x:
 															info.point.x > 0
 																? 1500
 																: -1500,
-														transition: {
+										// 			transition: {
 															duration: 0.75,
 														},
 													});
 												}
-											}}
-											dragSnapToOrigin={true}
+										// }}
+										// dragSnapToOrigin={true}
 											drag="x"
-											dragElastic={0.25}
-											dragTransition={{
-												bounceStiffness: 100,
-											}}
-											key={restaurant.place_id}
-											className="absolute flex justify-center items-center h-full w-full"
-										>
-											<FoodCard restaurant={restaurant} />
-										</motion.div>
-								  ))
+										dragElastic={0.25}
+										dragTransition={{
+											bounceStiffness: 100,
+										}}
+										key={restaurant.place_id}
+										className="absolute flex justify-center items-center h-full w-full"
+										key={i}
+									>
+										<FoodCard restaurant={restaurant} />
+									</motion.div>
+								))
 								: null}
 						</motion.div>
 					</div>

@@ -8,5 +8,5 @@ body,
 #__next {
   height: 100%;
   scroll-behavior: smooth;
-  background-color: rgba(255, 253, 208, 0.76);
+  background-color: #4444;
 }
