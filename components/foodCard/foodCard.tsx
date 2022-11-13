@@ -38,25 +38,23 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 	};
 
 	function getImage() {
-		return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${restaurant.photos![0]?.width
-			}&photo_reference=${restaurant?.photos![0]?.photo_reference}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY
-			}`;
-
+		return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${
+			restaurant.photos![0]?.width
+		}&photo_reference=${restaurant?.photos![0]?.photo_reference}&key=${
+			process.env.NEXT_PUBLIC_GOOGLE_API_KEY
+		}`;
 	}
 
-	useEffect(
-		() => {
-			axios2(config2)
-				.then(function (response: any) {
-					setInformations(response?.data?.result);
-				})
-				.catch(function (error: any) {
-					console.log(error);
-				});
+	useEffect(() => {
+		axios2(config2)
+			.then(function (response: any) {
+				setInformations(response?.data?.result);
+			})
+			.catch(function (error: any) {
+				console.log(error);
+			});
+	}, []);
 
-		}, []);
-
-	useEffect(() => { console.log(informations) }, [informations]);
 	return (
 		<motion.div
 			animate={controls}
@@ -104,14 +102,20 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 										</span>
 									)}
 								</span>
-								<span>Rating: {restaurant.rating} out of 5</span>
+								<span>
+									Rating: {restaurant.rating} out of 5
+								</span>
 								<span className="text-xl flex flex-row text-yellow-500 items-center">
-									<span className="text-lg">Price Range:</span> {Array(restaurant.price_level).fill(
+									<span className="text-lg">
+										Price Range:
+									</span>{" "}
+									{Array(restaurant.price_level).fill(
 										<BiDollar className="" />
 									)}
 								</span>
 								<span className="  flex items-center flex-row gap-x-1">
-									<AiFillPhone /> {informations?.formatted_phone_number}
+									<AiFillPhone />{" "}
+									{informations?.formatted_phone_number}
 								</span>
 
 								<p>
@@ -120,8 +124,8 @@ export default function FoodCard({ restaurant }: { restaurant: Restaurant }) {
 							</div>
 						</div>
 					</div>
-				</div >
-			</div >
-		</motion.div >
+				</div>
+			</div>
+		</motion.div>
 	);
 }
