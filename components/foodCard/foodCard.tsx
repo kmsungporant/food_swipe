@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BsTelephoneFill } from "react-icons/bs";
-import { Information } from "../../pages/api/type2";
+import { Information } from "../../pages/api/types";
 import { motion, MotionConfig, useAnimationControls } from "framer-motion";
 import { TbCurrencyDollar } from "react-icons/tb";
 import { Restaurant } from "../../pages/api/types";
