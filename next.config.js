@@ -5,7 +5,7 @@ module.exports = {
 		return [
 			{
 				// matching all API routes
-				source: "/:path*",
+				source: "*",
 				headers: [
 					{ key: "Access-Control-Allow-Credentials", value: "true" },
 					{
